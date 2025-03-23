@@ -50,7 +50,7 @@ public class UserService {
                 usuario.setCorreo(correo);
                 usuario.setTelefono(telefono);
                 usuario.setContrasena(contrasena);
-                usuario.setTipoUsuario(0);
+                usuario.setTipoUsuario(0); // Indica que es un usuario normal por defecto
                 usuario.setUltimoAcceso(ultimo_acceso);
                 
                 usuarioRepository.save(usuario);
