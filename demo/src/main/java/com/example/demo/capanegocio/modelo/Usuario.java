@@ -24,7 +24,7 @@ public class Usuario {
     private String contrasena;    
     private int tipoUsuario; 
   
-    private LocalDate ultimo_acceso;
+    private LocalDate ultimoAcceso;
 
     public long getidUsuario() {
         return idUsuario;
@@ -91,11 +91,11 @@ public class Usuario {
     }
 
     public LocalDate getUltimoAcceso() {
-        return ultimo_acceso;
+        return ultimoAcceso;
     }
 
-    public void setUltimoAcceso(LocalDate ultimo_acceso) {
-        this.ultimo_acceso = ultimo_acceso;
+    public void setUltimoAcceso(LocalDate ultimoAcceso) {
+        this.ultimoAcceso = ultimoAcceso;
     }
 
 
@@ -109,7 +109,7 @@ public String toString() {
            "Teléfono: " + telefono + "\n" +
            "Contraseña: "+ contrasena + "\n"+ 
            "Tipo de Usuario: " + tipoUsuario + "\n" +
-           "Último Acceso: " + ultimo_acceso + "\n";
+           "Último Acceso: " + ultimoAcceso + "\n";
 }
 
 
