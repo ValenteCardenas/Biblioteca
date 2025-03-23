@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.demo.capanegocio"})
+@ComponentScan(basePackages = {"com.example.demo"})
 public class DemoApplication {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class DemoApplication {
         
           
          
-          Usuario usuario = userService.agregaUsuario("Rodrigo", "Perez", "Luna", "rpl@gmail.com",
+          Usuario usuario = userService.agregaUsuario("Rodrigo", "Perez", "Luna", "rdl@gmail.com",
               4568, "contrasena3", LocalDate.now());
           
           
