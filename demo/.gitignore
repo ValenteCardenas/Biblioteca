@@ -35,6 +35,4 @@ build/
 ### Java Compiled Files ###
 *.class
 
-### Ignorar pom.xml ###
-pom.xml
 
