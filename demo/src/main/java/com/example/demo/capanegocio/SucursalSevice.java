@@ -19,4 +19,13 @@ public class SucursalSevice {
         return sucursales;
         
     }
+
+    public Sucursal recuperaSucursalPorNombre(String nombre) {
+        Sucursal sucursal = sucursalRepository.findByNombre(nombre);
+        //Chacamos que la sucursal exista
+        if (sucursal == null) {
+            throw new IllegalArgumentException("La sucursal no existe");
+        }
+        return sucursal;
+    }
 }
