@@ -1,20 +1,20 @@
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\AutorService.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\LibroService.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Autor.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Libro.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Prestamo.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Usuario.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\PrestamoService.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\UserService.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capapersistencia\AutorRepository.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capapersistencia\LibroRepository.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capapersistencia\PrestamoRepository.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\capapersistencia\UsuarioRepository.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\DemoApplication.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\formularios\FormlarioLogin.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\formularios\FormularioDevolucion.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\formularios\FormularioRegistro.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\formularios\InicioSesion.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\formularios\MenuPrestamo.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\formularios\MenuUsuario.java
-C:\Users\vsfs2\Documents\REPOSITORIO\jpa\Biblioteca\demo\src\main\java\com\example\demo\formularios\TablaPrestamos.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\AutorService.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\LibroService.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\modelo\Autor.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\modelo\Libro.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\modelo\Prestamo.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\modelo\Usuario.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\PrestamoService.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capanegocio\UserService.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capapersistencia\AutorRepository.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capapersistencia\LibroRepository.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capapersistencia\PrestamoRepository.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\capapersistencia\UsuarioRepository.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\DemoApplication.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\formularios\FormlarioLogin.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\formularios\FormularioDevolucion.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\formularios\FormularioRegistro.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\formularios\InicioSesion.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\formularios\MenuPrestamo.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\formularios\MenuUsuario.java
+C:\Users\Jose Carlos\Documents\NetBeansProjects\Biblioteca\Biblioteca3\demo\src\main\java\com\example\demo\formularios\TablaPrestamos.java
