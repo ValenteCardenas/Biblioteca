@@ -5,8 +5,12 @@
 package com.example.demo.capapersistencia;
 
 import com.example.demo.capanegocio.modelo.Libro;
+
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
 
 /**
  *
@@ -15,5 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LibroRepository extends CrudRepository <Libro, Long> {
     public Libro findByTitulo(String titulo); 
-    
+    public List<Libro> findByAutor(String autor);
+    public List<Libro> findBySucursal(String sucursal);
 }

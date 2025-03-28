@@ -31,6 +31,10 @@ public class Libro {
     @JoinColumn(name = "id_autor", nullable = false)
     private Autor autor;
 
+    @ManyToOne
+    @JoinColumn(name = "idSucursal", nullable = false)
+    private Sucursal sucursal;
+
     public int getidLibro() {
         return idLibro;
     }
@@ -78,5 +82,21 @@ public class Libro {
     public void setAutor(Autor autor) {
         this.autor = autor;
     }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro [titulo=" + titulo + ", editorial=" + editorial + ", anio=" + anio + ", cantidad=" + cantidad
+                + ", autor=" + autor + ", sucursal=" + sucursal + "]";
+    }
+
+    
 
 }
