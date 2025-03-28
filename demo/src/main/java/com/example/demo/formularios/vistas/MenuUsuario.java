@@ -4,6 +4,11 @@
  */
 package com.example.demo.formularios.vistas;
 
+<<<<<<< HEAD
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+>>>>>>> 123360032bdd24dbfd6445eedeaf0e37a6786f9f
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +20,13 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class MenuUsuario extends javax.swing.JFrame {
 
+    @Autowired
+    private ApplicationContext context;
+    
     /**
      * Creates new form MenuUsuario
      */
+    @Autowired
     public MenuUsuario() {
         initComponents();
     }
@@ -99,13 +108,13 @@ public class MenuUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIrAPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAPrestamosActionPerformed
-        MenuPrestamo prestamo=new MenuPrestamo();
+        MenuPrestamo prestamo=context.getBean(MenuPrestamo.class);
         prestamo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrAPrestamosActionPerformed
 
     private void jButtonIrADevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrADevolucionesActionPerformed
-        FormularioDevolucion devolucion=new FormularioDevolucion();
+        FormularioDevolucion devolucion=context.getBean(FormularioDevolucion.class);
         devolucion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrADevolucionesActionPerformed

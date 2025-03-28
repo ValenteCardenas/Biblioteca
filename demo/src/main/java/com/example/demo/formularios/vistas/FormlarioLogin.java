@@ -33,6 +33,7 @@ public class FormlarioLogin extends javax.swing.JFrame {
     /**
      * Creates new form FormlarioLogin
      */
+    @Autowired
     public FormlarioLogin() {
         initComponents();
     }

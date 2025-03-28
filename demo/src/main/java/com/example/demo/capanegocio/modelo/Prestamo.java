@@ -2,6 +2,7 @@ package com.example.demo.capanegocio.modelo;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 public class Prestamo {
@@ -12,11 +13,11 @@ public class Prestamo {
 
     @ManyToOne
     @JoinColumn(name = "idLibro", nullable = false)
-    private Libro libro;  // Cambiado de idLibro a libro
+    private Libro libro;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;  // Cambiado de id_usuario a usuario
+    private Usuario usuario;
 
     @Column(nullable = false)
     private LocalDate fechaPrestamo;
@@ -47,6 +48,15 @@ public class Prestamo {
     }
     
     
+
+    @Column
+    private boolean multaPagada = false;
+
+    @Column
+    private LocalDate fechaDevolucion;
+
+    @Column
+    private double multaAcumulada = 0.0;
 
     // Getters y setters
     public int getIdPrestamo() {
@@ -88,16 +98,52 @@ public class Prestamo {
     public void setFechaLimite(LocalDate fechaLimite) {
         this.fechaLimite = fechaLimite;
     }
-    
-    // Método toString
+
+    public boolean isMultaPagada() {
+        return multaPagada;
+    }
+
+    public void setMultaPagada(boolean multaPagada) {
+        this.multaPagada = multaPagada;
+    }
+
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
+
+    public double getMultaAcumulada() {
+        return multaAcumulada;
+    }
+
+    public void setMultaAcumulada(double multaAcumulada) {
+        this.multaAcumulada = multaAcumulada;
+    }
+
+    // Método para calcular la multa actualizada
+    public double calcularMultaActual() {
+        if (multaPagada || LocalDate.now().isBefore(fechaLimite) || fechaDevolucion != null) {
+            return 0.0;
+        }
+        
+        long diasRetraso = ChronoUnit.DAYS.between(fechaLimite, LocalDate.now());
+        this.multaAcumulada = diasRetraso * 5.0; // $5 por día de retraso
+        return this.multaAcumulada;
+    }
+
     @Override
-public String toString() {
-    return "Prestamo:" + "\n"+
-           "  ID Prestamo: " + idPrestamo + "\n" +
-           "  Libro: " + (libro != null ? libro.getTitulo() : "N/A") + "\n" +
-           "  Usuario: " + (usuario != null ? usuario.getNombre() : "N/A") + "\n" +
-           "  Fecha de prestamo: " + fechaPrestamo + "\n" +
-           "  Fecha limite: " + fechaLimite;
-}
-    
+    public String toString() {
+        return "Prestamo:" + "\n"+
+               "  ID Prestamo: " + idPrestamo + "\n" +
+               "  Libro: " + (libro != null ? libro.getTitulo() : "N/A") + "\n" +
+               "  Usuario: " + (usuario != null ? usuario.getNombre() : "N/A") + "\n" +
+               "  Fecha de prestamo: " + fechaPrestamo + "\n" +
+               "  Fecha limite: " + fechaLimite + "\n" +
+               "  Fecha devolución: " + (fechaDevolucion != null ? fechaDevolucion : "Pendiente") + "\n" +
+               "  Multa acumulada: $" + multaAcumulada + "\n" +
+               "  Multa pagada: " + (multaPagada ? "Sí" : "No");
+    }
 }

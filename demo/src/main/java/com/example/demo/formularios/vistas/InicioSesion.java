@@ -28,6 +28,7 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioSesion
      */
+    @Autowired
     public InicioSesion() {
         initComponents();
     }

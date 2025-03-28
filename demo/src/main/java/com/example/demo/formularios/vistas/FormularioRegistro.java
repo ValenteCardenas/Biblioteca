@@ -26,6 +26,11 @@ public class FormularioRegistro extends javax.swing.JFrame {
     @Autowired
     UserService userService;
     
+<<<<<<< HEAD
+=======
+    @Autowired
+    UsuarioRepository usuarioRepository;
+>>>>>>> 123360032bdd24dbfd6445eedeaf0e37a6786f9f
     
     @Autowired
     private ApplicationContext context;
@@ -234,6 +239,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
         Long tel=Long.parseLong(telefono);
         String contrasena=new String(txtContrasena.getPassword());
         LocalDate ultimo_acceso=LocalDate.now();
+<<<<<<< HEAD
 
         try{
             userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
@@ -244,6 +250,24 @@ public class FormularioRegistro extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, "Error al registrar usuario");
         }
+=======
+        
+        userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
+        JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
+        InicioSesion sesion=context.getBean(InicioSesion.class);
+        sesion.setVisible(true);
+        this.dispose();
+
+        /*try{
+            userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
+            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
+            InicioSesion sesion=context.getBean(InicioSesion.class);
+            sesion.setVisible(true);
+            this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al registrar usuario");
+        }*/
+>>>>>>> 123360032bdd24dbfd6445eedeaf0e37a6786f9f
         
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 

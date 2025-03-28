@@ -8,6 +8,8 @@ import com.example.demo.capanegocio.modelo.Autor;
 import com.example.demo.capanegocio.modelo.Libro;
 import com.example.demo.capapersistencia.LibroRepository;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +66,15 @@ public class LibroService {
         libroRepository.save(libro);
 
         return libro;
+    }
+
+    //Método para recuperar una lista de libros por su autor
+    public ArrayList<Libro> recuperaLibrosPorAutor(String autor) {
+        List<Libro> libros = libroRepository.findByAutor(autor);
+        //Si no existen libros con ese autor
+        if (libros.isEmpty()) {
+            throw new IllegalArgumentException("No existen libros con ese autor");
+        }
+        return new ArrayList<>(libros);
     }
 }

@@ -4,21 +4,17 @@
  */
 package com.example.demo.capapersistencia;
 
-import com.example.demo.capanegocio.modelo.Libro;
-
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.capanegocio.modelo.Sucursal;
 
 /**
  *
- * @author vsfs2
+ * @author 100077515
  */
 @Repository
-public interface LibroRepository extends CrudRepository <Libro, Long> {
-    public Libro findByTitulo(String titulo); 
-    public List<Libro> findByAutor(String autor);
-    public List<Libro> findBySucursal(String sucursal);
+public interface SucursalRepository extends CrudRepository<Sucursal, Integer> {
+    public Sucursal findByNombre(String nombre);
+    public Sucursal findByDireccion(String direccion);
 }
