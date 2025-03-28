@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+
 /**
  *
  * @author 100077515
@@ -28,7 +29,7 @@ public class Inventario {
 
     @ManyToOne
     @JoinColumn(name = "idSucursal", nullable = false)
-    private Suscursal sucursal;
+    private Sucursal sucursal;
 
     @Column(nullable = false)
     private int cantidad;
@@ -49,11 +50,11 @@ public class Inventario {
         this.libro = libro;
     }
 
-    public Suscursal getSucursal() {
+    public Sucursal getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Suscursal sucursal) {
+    public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
 
