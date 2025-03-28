@@ -11,14 +11,14 @@ import com.example.demo.capapersistencia.LibroRepository;
 import com.example.demo.capapersistencia.PrestamoRepository;
 import com.example.demo.capapersistencia.UsuarioRepository;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author vsfs2
- */
 @Service
 public class PrestamoService {
 
@@ -31,58 +31,134 @@ public class PrestamoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // Tarifa de multa por día de retraso
+    private static final double TARIFA_MULTA_POR_DIA = 5.0;
+    private static final int DIAS_PRESTAMO = 14; // Días de duración del préstamo
+
     /**
      * Recupera todos los préstamos de la base de datos.
-     *
-     * @return Lista de préstamos.
      */
     public ArrayList<Prestamo> recuperaPrestamos() {
-        System.out.println("prestamoRepository = " + prestamoRepository);
-
-        // Convertimos el Iterable a ArrayList
-      
-        ArrayList<Prestamo> prestamos = (ArrayList<Prestamo>) prestamoRepository.findAll();
-    
-        return prestamos;
+        return (ArrayList<Prestamo>) prestamoRepository.findAll();
     }
+
     /**
- * Crea un nuevo préstamo y lo guarda en la base de datos.
- *
- * @param idLibro     ID del libro prestado.
- * @param idUsuario   ID del usuario que realiza el préstamo.
- * @return El préstamo creado.
- * @throws IllegalArgumentException Si el libro o el usuario no existen, o si el libro no está disponible.
- */
-public Prestamo creaPrestamo(Long idLibro, Long idUsuario) {
-    // Verifica si el libro existe
-    
-    Libro libro = libroRepository.findById(idLibro)
-            .orElseThrow(() -> new IllegalArgumentException("El libro no existe"));
+     * Crea un nuevo préstamo.
+     */
+    @Transactional
+    public Prestamo creaPrestamo(Long idLibro, Long idUsuario) {
+        Libro libro = libroRepository.findById(idLibro)
+                .orElseThrow(() -> new IllegalArgumentException("El libro no existe"));
 
-    // Verifica si el usuario existe
-    Usuario usuario = usuarioRepository.findById(idUsuario)
-            .orElseThrow(() -> new IllegalArgumentException("El usuario no existe"));
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new IllegalArgumentException("El usuario no existe"));
 
-    // Verifica si hay ejemplares disponibles del libro
-    if (libro.getCantidad() <= 0) {
-        throw new IllegalArgumentException("No hay ejemplares disponibles del libro");
+        if (libro.getCantidad() <= 0) {
+            throw new IllegalArgumentException("No hay ejemplares disponibles del libro");
+        }
+
+        Prestamo prestamo = new Prestamo();
+        prestamo.setLibro(libro);
+        prestamo.setUsuario(usuario);
+        prestamo.setFechaPrestamo(LocalDate.now());
+        prestamo.setFechaLimite(LocalDate.now().plusDays(DIAS_PRESTAMO));
+        prestamo.setMultaAcumulada(0.0);
+        prestamo.setMultaPagada(false);
+        prestamo.setFechaDevolucion(null);
+
+        // Actualizar disponibilidad del libro
+        libro.setCantidad(libro.getCantidad() - 1);
+
+        libroRepository.save(libro);
+        return prestamoRepository.save(prestamo);
     }
 
-    // Crea el préstamo
-    Prestamo prestamo = new Prestamo();
-    prestamo.setLibro(libro);
-    prestamo.setUsuario(usuario);
-    prestamo.setFechaPrestamo(LocalDate.now()); // Fecha actual
-    prestamo.setFechaLimite(LocalDate.now().plusDays(14)); // 14 días después
+    /**
+     * Calcula la multa acumulada para un préstamo.
+     */
+    public double calcularMulta(int idPrestamo) {
+        Prestamo prestamo = prestamoRepository.findById(idPrestamo)
+                .orElseThrow(() -> new IllegalArgumentException("Préstamo no encontrado"));
 
-    // Guarda el préstamo en la base de datos
-    prestamoRepository.save(prestamo);
+        if (prestamo.getFechaDevolucion() != null || prestamo.isMultaPagada()) {
+            return 0.0;
+        }
 
-    // Reduce la cantidad de ejemplares disponibles del libro
-    libro.setCantidad(libro.getCantidad() - 1);
-    libroRepository.save(libro);
+        if (LocalDate.now().isBefore(prestamo.getFechaLimite())) {
+            return 0.0;
+        }
 
-    return prestamo;
-}
-    
+        long diasRetraso = ChronoUnit.DAYS.between(prestamo.getFechaLimite(), LocalDate.now());
+        return diasRetraso * TARIFA_MULTA_POR_DIA;
+    }
+
+    /**
+     * Registra la devolución de un libro.
+     */
+    @Transactional
+    public Prestamo registrarDevolucion(int idPrestamo) {
+        Prestamo prestamo = prestamoRepository.findById(idPrestamo)
+                .orElseThrow(() -> new IllegalArgumentException("Préstamo no encontrado"));
+
+        if (prestamo.getFechaDevolucion() != null) {
+            throw new IllegalArgumentException("Este préstamo ya fue devuelto");
+        }
+
+        prestamo.setFechaDevolucion(LocalDate.now());
+        
+        // Calcular multa final si hay retraso
+        if (LocalDate.now().isAfter(prestamo.getFechaLimite()) && !prestamo.isMultaPagada()) {
+            long diasRetraso = ChronoUnit.DAYS.between(prestamo.getFechaLimite(), LocalDate.now());
+            prestamo.setMultaAcumulada(diasRetraso * TARIFA_MULTA_POR_DIA);
+        }
+
+        // Liberar el libro
+        Libro libro = prestamo.getLibro();
+        libro.setCantidad(libro.getCantidad() + 1);
+
+        libroRepository.save(libro);
+        return prestamoRepository.save(prestamo);
+    }
+
+    /**
+     * Actualiza diariamente las multas para préstamos vencidos no devueltos.
+     */
+    @Scheduled(cron = "0 0 0 * * ?") // Se ejecuta a medianoche cada día
+    @Transactional
+    public void actualizarMultasDiarias() {
+        List<Prestamo> prestamosVencidos = prestamoRepository
+                .findByFechaDevolucionIsNullAndFechaLimiteBefore(LocalDate.now());
+
+        for (Prestamo prestamo : prestamosVencidos) {
+            if (!prestamo.isMultaPagada()) {
+                long diasRetraso = ChronoUnit.DAYS.between(prestamo.getFechaLimite(), LocalDate.now());
+                double multa = diasRetraso * TARIFA_MULTA_POR_DIA;
+                prestamo.setMultaAcumulada(multa);
+                prestamoRepository.save(prestamo);
+            }
+        }
+    }
+
+    /**
+     * Registra el pago de una multa.
+     */
+    @Transactional
+    public Prestamo pagarMulta(int idPrestamo) {
+        Prestamo prestamo = prestamoRepository.findById(idPrestamo)
+                .orElseThrow(() -> new IllegalArgumentException("Préstamo no encontrado"));
+
+        if (prestamo.isMultaPagada()) {
+            throw new IllegalStateException("La multa ya fue pagada");
+        }
+
+        prestamo.setMultaPagada(true);
+        return prestamoRepository.save(prestamo);
+    }
+
+    /**
+     * Obtiene préstamos con multas pendientes de pago.
+     */
+    public List<Prestamo> obtenerPrestamosConMultaPendiente() {
+        return prestamoRepository.findByMultaAcumuladaGreaterThanAndMultaPagadaFalse(0.0);
+    }
 }
