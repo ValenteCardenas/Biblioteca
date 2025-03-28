@@ -4,15 +4,8 @@
  */
 package com.example.demo.capanegocio.modelo;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 /**
  *
@@ -27,9 +20,19 @@ public class Devolucion {
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+    
+    @OneToOne
+    @JoinColumn(name = "id_prestamo")
+    private Prestamo prestamo;
 
     @Column(nullable = false)
     private LocalDate fechaDevolucion;
+
+    @Column
+    private double multa;
+
+    @Column
+    private String estado; // "PAGADO", "PENDIENTE"
 
     public int getIdDevolucion() {
         return idDevolucion;
@@ -47,6 +50,14 @@ public class Devolucion {
         this.usuario = usuario;
     }
 
+    public Prestamo getPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(Prestamo prestamo) {
+        this.prestamo = prestamo;
+    }
+
     public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
@@ -55,12 +66,30 @@ public class Devolucion {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    @Override
-    public String toString() {
-        return "Devolucion [idDevolucion=" + idDevolucion + ", usuario=" + usuario + ", fechaDevolucion="
-                + fechaDevolucion + "]";
+    public double getMulta() {
+        return multa;
     }
 
-    
-    
+    public void setMulta(double multa) {
+        this.multa = multa;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Devolucion:" + "\n" +
+               "  ID Devolucion: " + idDevolucion + "\n" +
+               "  Usuario: " + (usuario != null ? usuario.toString() : "N/A") + "\n" +
+               "  Prestamo ID: " + (prestamo != null ? prestamo.getIdPrestamo() : "N/A") + "\n" +
+               "  Fecha de devolucion: " + fechaDevolucion + "\n" +
+               "  Multa: " + multa + "\n" +
+               "  Estado: " + estado;
+    }
 }
