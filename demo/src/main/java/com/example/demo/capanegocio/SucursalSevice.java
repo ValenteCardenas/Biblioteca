@@ -20,6 +20,7 @@ public class SucursalSevice {
         
     }
 
+    //Método para recuperar una sucursal con su nombre una nueva sucursal
     public Sucursal recuperaSucursalPorNombre(String nombre) {
         Sucursal sucursal = sucursalRepository.findByNombre(nombre);
         //Chacamos que la sucursal exista

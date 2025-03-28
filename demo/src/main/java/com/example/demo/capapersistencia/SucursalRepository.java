@@ -4,10 +4,17 @@
  */
 package com.example.demo.capapersistencia;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.capanegocio.modelo.Sucursal;
+
 /**
  *
  * @author 100077515
  */
-public interface SucursalRepository {
-    
+@Repository
+public interface SucursalRepository extends CrudRepository<Sucursal, Integer> {
+    public Sucursal findByNombre(String nombre);
+    public Sucursal findByDireccion(String direccion);
 }
