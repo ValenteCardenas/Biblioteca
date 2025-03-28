@@ -2,20 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.example.demo.formularios;
+package com.example.demo.formularios.vistas;
 
+import com.example.demo.capanegocio.UserService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author 03_06_2023
  */
+@Component
+@Scope("prototype")
 public class FormlarioLogin extends javax.swing.JFrame {
+    
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private ApplicationContext context;
 
     /**
      * Creates new form FormlarioLogin
@@ -24,24 +37,6 @@ public class FormlarioLogin extends javax.swing.JFrame {
         initComponents();
     }
     
-    public static boolean autenticar(String correoIngresado, String contrasenaIngresada) {
-
-        /*String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?";
-        Connection conexion = new ConexionDB().obtenerConexion();
-
-        try  {
-            PreparedStatement stmt = conexion.prepareStatement(sql);
-            stmt.setString(1, correoIngresado);
-            stmt.setString(2, contrasenaIngresada);
-            ResultSet rs = stmt.executeQuery();
-
-            return rs.next(); 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }*/
-        return true;
-    }
     
     
 
@@ -179,10 +174,10 @@ public class FormlarioLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
-        MenuUsuario usuario=new MenuUsuario();
+        MenuUsuario usuario=context.getBean(MenuUsuario.class);
         String correoIngresado=txtCorreo.getText();
         String contrasenaIngresada=new String(txtContrasena.getPassword());
-        if(autenticar(correoIngresado, contrasenaIngresada)){
+        if(userService.autenticar(correoIngresado, contrasenaIngresada)){
             JOptionPane.showMessageDialog(this, "Sesion iniciada");
             usuario.setVisible(true);
             this.dispose();
@@ -192,13 +187,13 @@ public class FormlarioLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     private void jButtonIrAInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAInicioSesionActionPerformed
-        InicioSesion sesion=new InicioSesion();
-        sesion.setVisible(true);
+        InicioSesion login=context.getBean(InicioSesion.class);
+        login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrAInicioSesionActionPerformed
 
     private void jButtonIrARegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrARegistroActionPerformed
-        FormularioRegistro registro=new FormularioRegistro();
+        FormularioRegistro registro=context.getBean(FormularioRegistro.class);
         registro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrARegistroActionPerformed

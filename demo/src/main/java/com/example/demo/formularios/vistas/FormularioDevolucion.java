@@ -4,7 +4,7 @@
  */
 
 
-package com.example.demo.formularios;
+package com.example.demo.formularios.vistas;
 
 
 //import CapaNegocio.ManejadorLibros;

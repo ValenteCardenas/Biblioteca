@@ -2,12 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.example.demo.formularios;
+package com.example.demo.formularios.vistas;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author 03_06_2023
  */
+@Component
+@Scope("prototype")
 public class MenuUsuario extends javax.swing.JFrame {
 
     /**

@@ -16,5 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository 
 public interface PrestamoRepository extends CrudRepository <Prestamo, Long> {
     public ArrayList<Prestamo> findByUsuarioIdUsuario (Long idUsuario);
-       
+    
+    
 } 

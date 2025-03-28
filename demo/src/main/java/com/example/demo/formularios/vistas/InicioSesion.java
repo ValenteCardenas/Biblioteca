@@ -2,20 +2,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.example.demo.formularios;
+package com.example.demo.formularios.vistas;
+
+import com.example.demo.capanegocio.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author 03_06_2023
  */
+
+@Component
+@Scope("prototype")
 public class InicioSesion extends javax.swing.JFrame {
 
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private ApplicationContext context;
+    
     /**
      * Creates new form InicioSesion
      */
     public InicioSesion() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,7 +91,8 @@ public class InicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIrAFormularioLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAFormularioLoginActionPerformed
-        FormlarioLogin login=new FormlarioLogin();
+
+        FormlarioLogin login = context.getBean(FormlarioLogin.class);
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrAFormularioLoginActionPerformed
@@ -109,7 +127,7 @@ public class InicioSesion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InicioSesion().setVisible(true);
+                //new InicioSesion().setVisible(true);
             }
         });
     }

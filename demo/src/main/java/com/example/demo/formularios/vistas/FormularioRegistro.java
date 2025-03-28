@@ -2,62 +2,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.example.demo.formularios;
+package com.example.demo.formularios.vistas;
 
+import com.example.demo.capanegocio.UserService;
+import com.example.demo.capapersistencia.UsuarioRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author 03_06_2023
  */
+@Component
+@Scope("prototype")
 public class FormularioRegistro extends javax.swing.JFrame {
 
+    @Autowired
+    UserService userService;
+    
+    
+    @Autowired
+    private ApplicationContext context;
+    
     /**
      * Creates new form FormularioRegistro
      */
+    
+    @Autowired
     public FormularioRegistro() {
         initComponents();
     }
     
-    private void registrarUsuario(){
-        /*String nombre=txtNombre.getText();
-        String apellidoPaterno=txtApellidoPaterno.getText();
-        String apellidoMaterno=txtApellidoMaterno.getText();
-        String correo=txtCorreo.getText();
-        String telefono=txtTelefono.getText();
-        String contrasena=new String(txtContrasena.getPassword());
-        
-        Connection conexion = new ConexionDB().obtenerConexion();
-        
-        if(conexion!=null){
-            try{
-                String sql="INSERT INTO Usuario (nombre, apellido_pat, apellido_mat, correo, telefono, contrasena) VALUES (?,?,?,?,?,?)";
-                PreparedStatement pst = conexion.prepareStatement(sql);
-                pst.setString(1, nombre);
-                pst.setString(2, apellidoPaterno);
-                pst.setString(3, apellidoMaterno);
-                pst.setString(4, correo);
-                pst.setString(5, telefono);
-                pst.setString(6, contrasena);
-                
-                int resultado = pst.executeUpdate();
-                
-                if(resultado>0){
-                    JOptionPane.showMessageDialog(this, "El usuario se registro exitosamente");
-                }else{
-                    JOptionPane.showMessageDialog(this, "Error al registrarse");
-                }
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error");
-            }
-        }*/
-    }
-    
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        registrarUsuario();
-    }        
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -244,10 +226,25 @@ public class FormularioRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-        registrarUsuario();
-        FormlarioLogin login=new FormlarioLogin();
-        login.setVisible(true);
-        this.dispose();
+        String nombre=txtNombre.getText();
+        String apellido_paterno=txtApellidoPaterno.getText();
+        String apellido_materno=txtApellidoMaterno.getText();
+        String correo=txtCorreo.getText();
+        String telefono=txtTelefono.getText();
+        Long tel=Long.parseLong(telefono);
+        String contrasena=new String(txtContrasena.getPassword());
+        LocalDate ultimo_acceso=LocalDate.now();
+
+        try{
+            userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
+            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
+            InicioSesion login=context.getBean(InicioSesion.class);
+            login.setVisible(true);
+            this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al registrar usuario");
+        }
+        
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -255,7 +252,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void jButtonIrAFormularioLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAFormularioLoginActionPerformed
-        FormlarioLogin login=new FormlarioLogin();
+        InicioSesion login=context.getBean(InicioSesion.class);
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrAFormularioLoginActionPerformed

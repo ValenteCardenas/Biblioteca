@@ -23,6 +23,30 @@ public class Prestamo {
 
     @Column(nullable = false)
     private LocalDate fechaLimite;
+    
+    @Column
+    private boolean multaPagada=false;
+    
+    @Column
+    private LocalDate fechaDevolucion;
+
+    public boolean isMultaPagada() {
+        return multaPagada;
+    }
+
+    public void setMultaPagada(boolean multaPagada) {
+        this.multaPagada = multaPagada;
+    }
+
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
+    
+    
 
     // Getters y setters
     public int getIdPrestamo() {

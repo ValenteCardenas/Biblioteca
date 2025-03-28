@@ -59,4 +59,8 @@ public class UserService {
 
 	}
     
+    public boolean autenticar(String correo, String contrasena) {
+        Usuario usuario = usuarioRepository.findByCorreo(correo);
+        return usuario != null && usuario.getContrasena().equals(contrasena);
+    }
 }
