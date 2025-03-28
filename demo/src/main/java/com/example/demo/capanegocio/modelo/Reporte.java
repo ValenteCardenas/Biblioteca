@@ -5,12 +5,15 @@
 package com.example.demo.capanegocio.modelo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author 100077515
  */
 @Entity
+@Table(name = "reporte")
 public class Reporte {
-    
+
 }
+

@@ -6,11 +6,9 @@ package com.example.demo.capanegocio.modelo;
 
 import jakarta.persistence.Entity;
 
-/**
- *
- * @author 100077515
- */
+
+
 @Entity
 public class Permisos {
-    
+
 }

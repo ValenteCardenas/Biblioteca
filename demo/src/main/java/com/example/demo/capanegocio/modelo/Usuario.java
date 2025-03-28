@@ -10,21 +10,24 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDate;
 
-    
-    @Entity  // Marcamos que esta clase se va a convertir en una tabla en la BD 
-public class Usuario {  
+@Entity
+public class Usuario { 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // estrategía es cómo quiero que se genere ese id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUsuario;
+    
     private String nombre;
     private String apellidoPat;
     private String apellidoMat;
     private String correo;
     private long telefono;
-    private String contrasena;    
+    private String contrasena; 
     private int tipoUsuario; 
-  
     private LocalDate ultimoAcceso;
+    
+    // NUEVO ATRIBUTO: 0 = sin permiso, 1 = con permiso
+    private int permisoSolicitudLibros;
 
     public long getidUsuario() {
         return idUsuario;
@@ -86,8 +89,8 @@ public class Usuario {
         return tipoUsuario;
     }
 
-    public void setTipoUsuario(int TipoUsuario) {
-        this.tipoUsuario = TipoUsuario;
+    public void setTipoUsuario(int tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public LocalDate getUltimoAcceso() {
@@ -97,25 +100,29 @@ public class Usuario {
     public void setUltimoAcceso(LocalDate ultimoAcceso) {
         this.ultimoAcceso = ultimoAcceso;
     }
-
-
-    @Override
-public String toString() {
-    return "ID Usuario: " + idUsuario + "\n" +
-           "Nombre: " + nombre + "\n" +
-           "Apellido Paterno: " + apellidoPat + "\n" +
-           "Apellido Materno: " + apellidoMat + "\n" +
-           "Correo: " + correo + "\n" +
-           "Teléfono: " + telefono + "\n" +
-           "Contraseña: "+ contrasena + "\n"+ 
-           "Tipo de Usuario: " + tipoUsuario + "\n" +
-           "Último Acceso: " + ultimoAcceso + "\n";
-}
-
-
     
+    // Getters y Setters para permisoSolicitudLibros
+    public int getPermisoSolicitudLibros() {
+        return permisoSolicitudLibros;
+    }
     
-    
+    public void setPermisoSolicitudLibros(int permisoSolicitudLibros) {
+        this.permisoSolicitudLibros = permisoSolicitudLibros;
+    }
+
+    @Override 
+    public String toString() {
+        return "ID Usuario: " + idUsuario + "\n" +
+               "Nombre: " + nombre + "\n" +
+               "Apellido Paterno: " + apellidoPat + "\n" +
+               "Apellido Materno: " + apellidoMat + "\n" +
+               "Correo: " + correo + "\n" +
+               "Teléfono: " + telefono + "\n" +
+               "Contraseña: " + contrasena + "\n" + 
+               "Tipo de Usuario: " + tipoUsuario + "\n" +
+               "Último Acceso: " + ultimoAcceso + "\n" +
+               "Permiso Solicitud Libros: " + permisoSolicitudLibros;
+    }
 }
 
 
