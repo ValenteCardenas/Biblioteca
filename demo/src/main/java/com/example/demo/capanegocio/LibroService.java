@@ -6,6 +6,7 @@ package com.example.demo.capanegocio;
 
 import com.example.demo.capanegocio.modelo.Autor;
 import com.example.demo.capanegocio.modelo.Libro;
+import com.example.demo.capanegocio.modelo.Sucursal;
 import com.example.demo.capapersistencia.LibroRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +70,8 @@ public class LibroService {
     }
 
     //Método para recuperar una lista de libros por su autor
-    public ArrayList<Libro> recuperaLibrosPorAutor(String autor) {
-        List<Libro> libros = libroRepository.findByAutor(autor);
+    public ArrayList<Libro> recuperaLibrosPorSucursal(int sucursal) {
+        List<Libro> libros = libroRepository.findBySucursal_IdSucursal(sucursal);
         //Si no existen libros con ese autor
         if (libros.isEmpty()) {
             throw new IllegalArgumentException("No existen libros con ese autor");

@@ -102,8 +102,8 @@ public class DemoApplication {
         prestamoService.creaPrestamo(5L, 2L); // Libro ID: 5, Usuario ID: 2
         */
       
-        ArrayList<Prestamo> prestamos = prestamoService.recuperaPrestamos();
-        System.out.println(prestamos);
+        //ArrayList<Prestamo> prestamos = prestamoService.recuperaPrestamos();
+        //System.out.println(prestamos);
 
       }
 }

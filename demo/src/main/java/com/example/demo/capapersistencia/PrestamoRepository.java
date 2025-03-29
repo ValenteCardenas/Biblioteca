@@ -20,7 +20,7 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Integer> {
     
     List<Prestamo> findByUsuarioIdUsuario(int idUsuario);
 
-    public Object findById(Long idPrestamo);
+    public Object findByIdPrestamo(int idPrestamo);
 
     public List<Prestamo> findByMultaAcumuladaGreaterThanAndMultaPagadaFalse(double d);
 }

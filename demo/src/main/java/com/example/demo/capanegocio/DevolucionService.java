@@ -23,6 +23,7 @@ public class DevolucionService {
 
     @Autowired
     private PrestamoRepository prestamoRepository;
+    
 
     /**
      * Registra una devolución y crea el registro correspondiente.
@@ -32,7 +33,7 @@ public class DevolucionService {
      * @return La devolución registrada.
      * @throws IllegalStateException Si el préstamo no existe, ya fue devuelto o ya tiene una devolución registrada.
      */
-    @Transactional
+    
     public Devolucion registrarDevolucion(int idPrestamo) {
         Prestamo prestamo = prestamoRepository.findById(idPrestamo)
                 .orElseThrow(() -> new IllegalArgumentException("Préstamo no encontrado"));
@@ -65,42 +66,37 @@ public class DevolucionService {
      * @return La devolución actualizada.
      * @throws IllegalStateException Si la devolución no existe o ya está pagada.
      */
-    @Transactional
+    
 public Devolucion pagarMulta(int idDevolucion) {
     // Versión con manejo explícito del Optional
-    Optional<Devolucion> optionalDevolucion = (Optional<Devolucion>) devolucionRepository.findById(idDevolucion);
-    
-    if (!optionalDevolucion.isPresent()) {
-        throw new IllegalArgumentException("No se encontró la devolución con ID: " + idDevolucion);
-    }
-    
-    Devolucion devolucion = optionalDevolucion.get();
-    
-    if ("PAGADO".equals(devolucion.getEstado())) {
-        throw new IllegalStateException("La multa ya fue pagada anteriormente");
-    }
+    Devolucion devolucion = (Devolucion) devolucionRepository.findByIdDevolucion(idDevolucion);
 
-    // Actualizar tanto la devolución como el préstamo asociado
-    devolucion.setEstado("PAGADO");
-    if (devolucion.getPrestamo() != null) {
-        devolucion.getPrestamo().setMultaPagada(true);
-        prestamoRepository.save(devolucion.getPrestamo());
-    }
-    
-    return devolucionRepository.save(devolucion);
+        if ("PAGADO".equals(devolucion.getEstado())) {
+            throw new IllegalStateException("La multa ya fue pagada anteriormente");
+        }
+
+        // Actualizar tanto la devolución como el préstamo asociado
+        devolucion.setEstado("PAGADO");
+        if (devolucion.getPrestamo() != null) {
+            devolucion.getPrestamo().setMultaPagada(true);
+            prestamoRepository.save(devolucion.getPrestamo());
+        }
+
+        return devolucionRepository.save(devolucion);
 }
 
     /**
      * Obtiene la multa pendiente para una devolución.
+     * @param idDevolucion
      */
     public double consultarMultaPendiente(int idDevolucion) {
-    Optional<Devolucion> optionalDevolucion = (Optional<Devolucion>) devolucionRepository.findById(idDevolucion);
+        
+        Devolucion optionalDevolucion = (Devolucion) devolucionRepository.findByIdDevolucion(idDevolucion);
     
-    if (!optionalDevolucion.isPresent()) {
+    /*if (optionalDevolucion =) {
         throw new IllegalArgumentException("No existe devolución con ID: " + idDevolucion);
-    }
+    }*/
     
-    Devolucion devolucion = optionalDevolucion.get();
-    return "PAGADO".equals(devolucion.getEstado()) ? 0.0 : devolucion.getMulta();
-}
+        return "PAGADO".equals(optionalDevolucion.getEstado()) ? 0.0 : optionalDevolucion.getMulta();
+    }
 }

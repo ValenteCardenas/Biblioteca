@@ -5,6 +5,7 @@
 package com.example.demo.capanegocio.modelo;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,6 +16,7 @@ import jakarta.persistence.ManyToOne;
  *
  * @author 100077515
  */
+@Entity
 public class Sucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

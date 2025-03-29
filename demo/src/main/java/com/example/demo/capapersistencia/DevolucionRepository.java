@@ -13,11 +13,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 @Repository
-public interface DevolucionRepository extends CrudRepository<Devolucion, Long> {
+public interface DevolucionRepository extends JpaRepository<Devolucion, Long> {
 
     public boolean existsByPrestamo(Prestamo prestamo);
 
-    public Object findById(int idDevolucion);
+    public Object findByIdDevolucion(int idDevolucion);
     
     
 }

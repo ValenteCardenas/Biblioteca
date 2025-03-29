@@ -6,17 +6,25 @@ package com.example.demo.formularios.vistas;
 
 import com.example.demo.capanegocio.modelo.Libro;
 import com.example.demo.capanegocio.LibroService;
+import com.example.demo.capanegocio.SucursalSevice;
+import com.example.demo.capanegocio.modelo.Sucursal;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author 100077515
  */
 public class AservoBiblioteca extends javax.swing.JFrame {
-
+    @Autowired
+    private LibroService libroService;
+    
+    @Autowired
+    private SucursalSevice sucursalService;
+    
     /**
      * Creates new form AservoBiblioteca
      */
@@ -110,15 +118,16 @@ public class AservoBiblioteca extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombreSucursal = jTextField1.getText().trim(); // Elimina espacios en blanco
+        String nombreSucursal; // Elimina espacios en blanco
+        nombreSucursal = jTextField1.getText().trim();
 
         if (nombreSucursal.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese el nombre de la sucursal.", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Detiene la ejecución si el nombre está vacío
         }
-
-        LibroService libroService = new LibroService();
-        List<Libro> libros = libroService.recuperaLibrosPorSucursal(nombreSucursal);
+        
+        Sucursal Sucursal = sucursalService.recuperaSucursalPorNombre(nombreSucursal);
+        List<Libro> libros = libroService.recuperaLibrosPorSucursal(Sucursal.getIdSucursal());
 
         if (libros == null) {
             JOptionPane.showMessageDialog(this, "Error al recuperar libros. Verifique la conexión o el nombre de la sucursal.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -138,7 +147,7 @@ public class AservoBiblioteca extends javax.swing.JFrame {
         }
         jList1.setModel(model);
     }
-    //GEN-LAST:event_jButton1ActionPerformed
+//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
