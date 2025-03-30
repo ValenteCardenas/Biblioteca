@@ -224,13 +224,14 @@ public class FormularioRegistro extends javax.swing.JFrame {
         Long tel=Long.parseLong(telefono);
         String contrasena=new String(txtContrasena.getPassword());
         LocalDate ultimo_acceso=LocalDate.now();
-        
-        /*userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
+        /*
+        userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
         JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
-        InicioSesion sesion=context.getBean(InicioSesion.class);
+        FormlarioLogin sesion=context.getBean(FormlarioLogin.class);
         sesion.setVisible(true);
         this.dispose();
         */
+        
         try{
             userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
             JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");

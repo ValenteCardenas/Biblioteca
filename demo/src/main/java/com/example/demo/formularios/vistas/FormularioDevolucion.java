@@ -13,17 +13,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author 03_06_2023
  */
+
+@Component
+@Scope("prototype")
 public class FormularioDevolucion extends javax.swing.JFrame {
 
     /**
      * Creates new form FormularioDevolucion
      */
+    
+    @Autowired 
+    private MenuUsuario menuUsuario;
     public FormularioDevolucion() {
         initComponents();
     }
@@ -151,8 +160,8 @@ public class FormularioDevolucion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDevolverActionPerformed
 
     private void jButtonIrAMenuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAMenuUsuarioActionPerformed
-        MenuUsuario usuario=new MenuUsuario();
-        usuario.setVisible(true);
+
+        menuUsuario.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrAMenuUsuarioActionPerformed
 

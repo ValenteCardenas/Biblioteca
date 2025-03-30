@@ -11,7 +11,6 @@ import com.example.demo.capanegocio.modelo.Usuario;
 import com.example.demo.capapersistencia.UsuarioRepository;
 import com.example.demo.formularios.vistas.FormlarioLogin;
 import com.example.demo.formularios.vistas.FormularioRegistro;
-import com.example.demo.formularios.vistas.InicioSesion;
 import jakarta.annotation.PostConstruct;
 import java.awt.GraphicsEnvironment;
 import java.time.LocalDate;

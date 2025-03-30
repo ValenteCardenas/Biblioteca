@@ -12,7 +12,7 @@ public class Prestamo {
     private int idPrestamo;
 
     @ManyToOne
-    @JoinColumn(name = "idLibro", nullable = false)
+    @JoinColumn(name = "id_libro", nullable = false)
     private Libro libro;
 
     @ManyToOne

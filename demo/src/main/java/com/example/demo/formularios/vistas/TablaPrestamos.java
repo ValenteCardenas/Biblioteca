@@ -13,6 +13,8 @@ import java.sql.ResultSet;
  *
  * @author 03_06_2023
  */
+
+
 public class TablaPrestamos extends JFrame {
     private JTextField campoBusqueda;
     private JTable tablaPrestamos;

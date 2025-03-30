@@ -4,18 +4,49 @@
  */
 package com.example.demo.formularios.vistas;
 
+import com.example.demo.capanegocio.PrestamoService;
+import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author 03_06_2023
  */
-public class MenuPrestamo extends javax.swing.JFrame {
 
+@Component
+@Scope("prototype")
+public class MenuPrestamo extends javax.swing.JFrame {
+    /*
+      @Autowired 
+    private MenuUsuario menuUsuario;
+*/
     /**
      * Creates new form MenuPrestamo
      */
+    
+    @Autowired 
+    private ApplicationContext context;
+    
+    @Autowired
+    private PrestamoService prestamoService;
+    
     public MenuPrestamo() {
         initComponents();
     }
+    
+   
+     
+     private long idUsuario; 
+    
+    public void  pasarId(long id){
+       this.idUsuario = id; 
+  }
+     
+     
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,6 +74,11 @@ public class MenuPrestamo extends javax.swing.JFrame {
         });
 
         jButtonCrearPrestamo.setText("Crear préstamo");
+        jButtonCrearPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearPrestamoActionPerformed(evt);
+            }
+        });
 
         jButtonIrAMenuUsuario.setText("Volver");
         jButtonIrAMenuUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -56,17 +92,19 @@ public class MenuPrestamo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonIrAMenuUsuario)
-                .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jButtonIrAConsulta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                .addComponent(jButtonCrearPrestamo)
-                .addGap(70, 70, 70))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonIrAMenuUsuario)
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonIrAConsulta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addComponent(jButtonCrearPrestamo)
+                        .addGap(70, 70, 70))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,16 +124,28 @@ public class MenuPrestamo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIrAMenuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAMenuUsuarioActionPerformed
-        MenuUsuario usuario=new MenuUsuario();
-        usuario.setVisible(true);
+        MenuUsuario menuUsuario = context.getBean(MenuUsuario.class);
+        menuUsuario.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrAMenuUsuarioActionPerformed
 
     private void jButtonIrAConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAConsultaActionPerformed
-        TablaPrestamos prestamos=new TablaPrestamos();
+        /*TablaPrestamos prestamos=new TablaPrestamos();
         prestamos.setVisible(true);
         this.dispose();
+        */
     }//GEN-LAST:event_jButtonIrAConsultaActionPerformed
+
+    private void jButtonCrearPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPrestamoActionPerformed
+        int numero = prestamoService.numeroPrestamos(idUsuario);
+        
+        if (numero < 2){
+            JOptionPane.showMessageDialog(this,"Siguiente vista");
+        }else {
+            JOptionPane.showMessageDialog(this,"Número máximo de préstamos alcanzado");
+        }
+           
+    }//GEN-LAST:event_jButtonCrearPrestamoActionPerformed
 
     /**
      * @param args the command line arguments

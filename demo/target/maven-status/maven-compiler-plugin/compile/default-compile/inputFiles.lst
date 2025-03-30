@@ -5,7 +5,6 @@ C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\cap
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Devolucion.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Inventario.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Libro.java
-C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Permisos.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Prestamo.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Reporte.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\capanegocio\modelo\Sucursal.java
@@ -27,7 +26,6 @@ C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\for
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\formularios\vistas\FormlarioLogin.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\formularios\vistas\FormularioDevolucion.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\formularios\vistas\FormularioRegistro.java
-C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\formularios\vistas\InicioSesion.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\formularios\vistas\MenuPrestamo.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\formularios\vistas\MenuUsuario.java
 C:\Users\vsfs2\Documents\REPO\Biblioteca\demo\src\main\java\com\example\demo\formularios\vistas\TablaPrestamos.java

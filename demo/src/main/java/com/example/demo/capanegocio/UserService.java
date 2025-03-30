@@ -4,7 +4,9 @@
  */
 package com.example.demo.capanegocio;
 
+import com.example.demo.capanegocio.modelo.Prestamo;
 import com.example.demo.capanegocio.modelo.Usuario;
+import com.example.demo.capapersistencia.PrestamoRepository;
 import com.example.demo.capapersistencia.UsuarioRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +23,10 @@ public class UserService {
     
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    private PrestamoRepository prestamoRepository;
+    
     
     
     public ArrayList <Usuario> recuperaUsuarios() {
@@ -52,6 +58,7 @@ public class UserService {
                 usuario.setContrasena(contrasena);
                 usuario.setTipoUsuario(0); // Indica que es un usuario normal por defecto
                 usuario.setUltimoAcceso(ultimo_acceso);
+                usuario.setPermisosPrestamo(1);
                 
                 usuarioRepository.save(usuario);
 	
@@ -59,8 +66,26 @@ public class UserService {
 
 	}
     
-    public boolean autenticar(String correo, String contrasena) {
+    public Usuario autenticar(String correo, String contrasena) {
         Usuario usuario = usuarioRepository.findByCorreo(correo);
-        return usuario != null && usuario.getContrasena().equals(contrasena);
+        if (usuario!=null && usuario.getContrasena().equals(contrasena)){
+            return usuario;
+            
+        }else{
+            return null;
+        }
+ 
     }
+    
+    public int tipoUsuario(Usuario user){
+        return user.getTipoUsuario();
+ 
+    }
+    
+    public long obtenerId(Usuario user){
+        return user.getidUsuario();
+ 
+    }
+    
+  
 }

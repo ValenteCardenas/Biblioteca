@@ -161,4 +161,18 @@ public class PrestamoService {
     public List<Prestamo> obtenerPrestamosConMultaPendiente() {
         return prestamoRepository.findByMultaAcumuladaGreaterThanAndMultaPagadaFalse(0.0);
     }
+    
+    
+    public int numeroPrestamos(long id){
+        
+        List<Prestamo> prestamos = ( ArrayList<Prestamo>)prestamoRepository.findByUsuarioIdUsuario(id);
+        
+        return prestamos.size();
+    }
+    
+            
+    
+
+    
+    
 }

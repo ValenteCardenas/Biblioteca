@@ -6,6 +6,7 @@ package com.example.demo.formularios.vistas;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +17,21 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 public class MenuUsuario extends javax.swing.JFrame {
-
+    
+        
     @Autowired
     private ApplicationContext context;
+    
+    private long idUsuario; 
+    
+ 
+    
+    //@Autowired
+    //private MenuPrestamo menuPrestamo; 
+    
+       // @Autowired
+    //private FormularioDevolucion formularioDevolucion; 
+    
     
     /**
      * Creates new form MenuUsuario
@@ -27,6 +40,10 @@ public class MenuUsuario extends javax.swing.JFrame {
     public MenuUsuario() {
         initComponents();
     }
+    
+     public void  pasarId(long id){
+       this.idUsuario = id; 
+  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -105,14 +122,15 @@ public class MenuUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIrAPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAPrestamosActionPerformed
-        MenuPrestamo prestamo=context.getBean(MenuPrestamo.class);
-        prestamo.setVisible(true);
+        MenuPrestamo menuPrestamo = context.getBean(MenuPrestamo.class);
+        menuPrestamo.pasarId(idUsuario);
+        menuPrestamo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrAPrestamosActionPerformed
 
     private void jButtonIrADevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrADevolucionesActionPerformed
-        FormularioDevolucion devolucion=context.getBean(FormularioDevolucion.class);
-        devolucion.setVisible(true);
+        FormularioDevolucion formularioDevolucion= context.getBean(FormularioDevolucion.class);
+        formularioDevolucion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonIrADevolucionesActionPerformed
 

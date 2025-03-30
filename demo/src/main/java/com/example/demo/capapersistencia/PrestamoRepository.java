@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -18,7 +19,7 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Integer> {
     
     List<Prestamo> findByMultaPagadaFalseAndFechaDevolucionIsNotNullAndMultaAcumuladaGreaterThan(double cantidad);
     
-    List<Prestamo> findByUsuarioIdUsuario(int idUsuario);
+    List<Prestamo> findByUsuarioIdUsuario(long idUsuario);
 
     public Object findByIdPrestamo(int idPrestamo);
 

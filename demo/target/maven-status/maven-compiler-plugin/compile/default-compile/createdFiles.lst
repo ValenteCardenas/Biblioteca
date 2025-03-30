@@ -2,7 +2,6 @@ com\example\demo\formularios\vistas\AservoBiblioteca$1.class
 com\example\demo\formularios\vistas\MenuPrestamo$2.class
 com\example\demo\formularios\vistas\FormlarioLogin$1.class
 com\example\demo\formularios\vistas\FormularioRegistro$1.class
-com\example\demo\formularios\vistas\InicioSesion$2.class
 com\example\demo\capanegocio\SucursalSevice.class
 com\example\demo\capapersistencia\LibroRepository.class
 com\example\demo\formularios\vistas\MenuUsuario.class
@@ -16,8 +15,6 @@ com\example\demo\capapersistencia\PrestamoRepository.class
 com\example\demo\formularios\vistas\FormularioDevolucion$1.class
 com\example\demo\formularios\vistas\MenuUsuario$1.class
 com\example\demo\capanegocio\AutorService.class
-com\example\demo\capanegocio\modelo\Permisos.class
-com\example\demo\formularios\vistas\InicioSesion$1.class
 com\example\demo\capanegocio\modelo\Sucursal.class
 com\example\demo\capanegocio\modelo\Usuario.class
 com\example\demo\formularios\vistas\FormlarioLogin$5.class
@@ -34,11 +31,11 @@ com\example\demo\formularios\vistas\FormularioRegistro$4.class
 com\example\demo\formularios\vistas\AservoBiblioteca$4.class
 com\example\demo\DemoApplication.class
 com\example\demo\capapersistencia\DevolucionRepository.class
-com\example\demo\formularios\vistas\FormlarioLogin$6.class
 com\example\demo\formularios\vistas\FormularioRegistro$3.class
 com\example\demo\formularios\vistas\FormularioDevolucion$2.class
 com\example\demo\capanegocio\modelo\Libro.class
 com\example\demo\capanegocio\DevolucionService.class
+com\example\demo\formularios\vistas\MenuPrestamo$4.class
 com\example\demo\formularios\vistas\MenuPrestamo.class
 com\example\demo\formularios\vistas\MenuUsuario$3.class
 com\example\demo\formularios\vistas\FormularioRegistro.class
@@ -58,5 +55,4 @@ com\example\demo\capanegocio\modelo\Inventario.class
 com\example\demo\capanegocio\modelo\Reporte.class
 com\example\demo\formularios\vistas\FormlarioLogin$3.class
 com\example\demo\formularios\vistas\MenuUsuario$2.class
-com\example\demo\formularios\vistas\InicioSesion.class
 com\example\demo\capanegocio\modelo\Prestamo.class

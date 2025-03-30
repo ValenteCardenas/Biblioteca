@@ -5,6 +5,7 @@
 package com.example.demo.formularios.vistas;
 
 import com.example.demo.capanegocio.UserService;
+import com.example.demo.capanegocio.modelo.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,7 +30,12 @@ public class FormlarioLogin extends javax.swing.JFrame {
     
     @Autowired
     private ApplicationContext context;
-
+    
+    @Autowired
+    private MenuUsuario usuario; 
+    
+    private long idUsuario; 
+    
     /**
      * Creates new form FormlarioLogin
      */
@@ -38,7 +44,9 @@ public class FormlarioLogin extends javax.swing.JFrame {
         initComponents();
     }
     
-    
+  public long pasarId(){
+      return this.idUsuario; 
+  }
     
 
 
@@ -57,7 +65,6 @@ public class FormlarioLogin extends javax.swing.JFrame {
         jButtonIniciarSesion = new javax.swing.JButton();
         txtCorreo = new javax.swing.JTextField();
         txtContrasena = new javax.swing.JPasswordField();
-        jButtonIrAInicioSesion = new javax.swing.JButton();
         jButtonIrARegistro = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -88,13 +95,6 @@ public class FormlarioLogin extends javax.swing.JFrame {
             }
         });
 
-        jButtonIrAInicioSesion.setText("Volver");
-        jButtonIrAInicioSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIrAInicioSesionActionPerformed(evt);
-            }
-        });
-
         jButtonIrARegistro.setText("Registrarse");
         jButtonIrARegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,8 +113,7 @@ public class FormlarioLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonIrAInicioSesion))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -142,11 +141,9 @@ public class FormlarioLogin extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButtonIrAInicioSesion))
-                .addGap(25, 25, 25)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -175,23 +172,43 @@ public class FormlarioLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
-        MenuUsuario usuario=context.getBean(MenuUsuario.class);
+        
         String correoIngresado=txtCorreo.getText();
         String contrasenaIngresada=new String(txtContrasena.getPassword());
-        if(userService.autenticar(correoIngresado, contrasenaIngresada)){
-            JOptionPane.showMessageDialog(this, "Sesion iniciada");
-            usuario.setVisible(true);
-            this.dispose();
+        Usuario user = userService.autenticar(correoIngresado, contrasenaIngresada);
+        
+        if(user != null){
+            long id = userService.obtenerId(user);
+            this.idUsuario = id; 
+            int tipoUsuario = userService.tipoUsuario(user);
+            switch(tipoUsuario){
+                
+                case 0: 
+                     JOptionPane.showMessageDialog(this, "Sesion iniciada");
+                     usuario.pasarId(id);
+                     usuario.setVisible(true);
+                     this.dispose();
+                     break;
+                     
+                case 1:
+                    /*JOptionPane.showMessageDialog(this, "Sesion iniciada");
+                     usuario.setVisible(true);
+                    this.dispose();
+
+                    */
+                    break;
+                 
+                default:
+                    JOptionPane.showMessageDialog(this, "Datos incorrectos");
+                    break;
+                         
+            }
+           
         }else{
             JOptionPane.showMessageDialog(this, "Datos incorrectos");
+            
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
-
-    private void jButtonIrAInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAInicioSesionActionPerformed
-        InicioSesion login=context.getBean(InicioSesion.class);
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonIrAInicioSesionActionPerformed
 
     private void jButtonIrARegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrARegistroActionPerformed
         FormularioRegistro registro=context.getBean(FormularioRegistro.class);
@@ -237,7 +254,6 @@ public class FormlarioLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIniciarSesion;
-    private javax.swing.JButton jButtonIrAInicioSesion;
     private javax.swing.JButton jButtonIrARegistro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
