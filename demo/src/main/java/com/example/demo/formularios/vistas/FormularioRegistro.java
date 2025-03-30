@@ -66,7 +66,6 @@ public class FormularioRegistro extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        jButtonIrAFormularioLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,13 +120,6 @@ public class FormularioRegistro extends javax.swing.JFrame {
             }
         });
 
-        jButtonIrAFormularioLogin.setText("Vover");
-        jButtonIrAFormularioLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIrAFormularioLoginActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,12 +129,10 @@ public class FormularioRegistro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(jButtonRegistrar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(185, 185, 185)
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonIrAFormularioLogin))
+                            .addComponent(jLabel1))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(23, 23, 23)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -176,10 +166,8 @@ public class FormularioRegistro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButtonIrAFormularioLogin))
-                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,7 +183,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -237,33 +225,27 @@ public class FormularioRegistro extends javax.swing.JFrame {
         String contrasena=new String(txtContrasena.getPassword());
         LocalDate ultimo_acceso=LocalDate.now();
         
-        userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
+        /*userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
         JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
         InicioSesion sesion=context.getBean(InicioSesion.class);
         sesion.setVisible(true);
         this.dispose();
-
-        /*try{
+        */
+        try{
             userService.agregaUsuario(nombre, apellido_paterno, apellido_materno, correo, tel, contrasena, ultimo_acceso);
             JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
-            InicioSesion sesion=context.getBean(InicioSesion.class);
+            FormlarioLogin sesion=context.getBean(FormlarioLogin.class);
             sesion.setVisible(true);
             this.dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, "Error al registrar usuario");
-        }*/
+        }
         
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         txtTelefono.setText("");
     }//GEN-LAST:event_txtTelefonoActionPerformed
-
-    private void jButtonIrAFormularioLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIrAFormularioLoginActionPerformed
-        InicioSesion login=context.getBean(InicioSesion.class);
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonIrAFormularioLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,7 +284,6 @@ public class FormularioRegistro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonIrAFormularioLogin;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
