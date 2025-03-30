@@ -9,6 +9,7 @@ import com.example.demo.capanegocio.modelo.Libro;
 import com.example.demo.capanegocio.modelo.Prestamo;
 import com.example.demo.capanegocio.modelo.Usuario;
 import com.example.demo.capapersistencia.UsuarioRepository;
+import com.example.demo.formularios.vistas.FormlarioLogin;
 import com.example.demo.formularios.vistas.FormularioRegistro;
 import com.example.demo.formularios.vistas.InicioSesion;
 import jakarta.annotation.PostConstruct;
@@ -49,7 +50,7 @@ public class DemoApplication {
         ApplicationContext context = app.run(args);
         
         // Obtener el bean y hacerlo visible
-        InicioSesion loginForm = context.getBean(InicioSesion.class);
+        FormlarioLogin loginForm = context.getBean(FormlarioLogin.class);
         loginForm.setVisible(true);
        
           

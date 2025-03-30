@@ -11,7 +11,6 @@ com\example\demo\capanegocio\LibroService.class
 com\example\demo\capanegocio\modelo\Devolucion.class
 com\example\demo\formularios\vistas\FormlarioLogin$4.class
 com\example\demo\formularios\vistas\AservoBiblioteca.class
-com\example\demo\formularios\vistas\FormularioRegistro$8.class
 com\example\demo\capanegocio\PrestamoService.class
 com\example\demo\capapersistencia\PrestamoRepository.class
 com\example\demo\formularios\vistas\FormularioDevolucion$1.class
