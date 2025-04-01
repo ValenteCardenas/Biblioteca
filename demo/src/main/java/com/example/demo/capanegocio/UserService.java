@@ -8,6 +8,7 @@ import com.example.demo.capanegocio.modelo.Usuario;
 import com.example.demo.capapersistencia.UsuarioRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 //import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,10 +54,31 @@ public class UserService {
                 usuario.setTipoUsuario(0); // Indica que es un usuario normal por defecto
                 usuario.setUltimoAcceso(ultimo_acceso);
                 
+                usuario.setPermisoPrestamo(true);
                 usuarioRepository.save(usuario);
 	
 		return usuario;
 
 	}
     
+    public boolean autenticar(String correo, String contrasena) {
+        Usuario usuario = usuarioRepository.findByCorreo(correo);
+        return usuario != null && usuario.getContrasena().equals(contrasena);
+    }
+    
+    public void actualizarPermiso(long idUsuario, boolean permisoActivo){
+        Optional<Usuario> opUsuario = usuarioRepository.findById(idUsuario);
+        if(opUsuario.isPresent()){
+            Usuario usuario = opUsuario.get();
+            usuario.setPermisoPrestamo((permisoActivo));
+            usuarioRepository.save(usuario);
+        }else{
+            throw  new RuntimeException("El id se usuario: " + idUsuario + " no se encuentra");
+        }
+        
+    }
+    
+    public void eliminarUsuario(Long idUsuario){
+        usuarioRepository.deleteById(idUsuario);
+    }
 }

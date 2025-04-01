@@ -4,6 +4,7 @@
  */
 package com.example.demo.capanegocio.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,9 @@ public class Usuario {
     private int tipoUsuario; 
   
     private LocalDate ultimoAcceso;
+    
+    @Column(name = "permiso_prestamo", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean permisoPrestamo = true;
 
     public long getidUsuario() {
         return idUsuario;
@@ -97,6 +101,14 @@ public class Usuario {
     public void setUltimoAcceso(LocalDate ultimoAcceso) {
         this.ultimoAcceso = ultimoAcceso;
     }
+    
+    public boolean getPermisoPrestamo(){
+        return permisoPrestamo;
+    }
+    
+    public void setPermisoPrestamo(boolean permisoPrestamo){
+        this.permisoPrestamo=permisoPrestamo;
+    }
 
 
     @Override
@@ -109,13 +121,9 @@ public String toString() {
            "Teléfono: " + telefono + "\n" +
            "Contraseña: "+ contrasena + "\n"+ 
            "Tipo de Usuario: " + tipoUsuario + "\n" +
-           "Último Acceso: " + ultimoAcceso + "\n";
+           "Último Acceso: " + ultimoAcceso + "\n" +
+           "Permiso de Préstamo: " + permisoPrestamo + "\n"; 
 }
-
-
-    
-    
-    
 }
 
 

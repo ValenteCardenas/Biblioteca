@@ -1,5 +1,6 @@
 package com.example.demo.capanegocio.modelo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Libro {
     @Column(nullable = false)
     private int cantidad;
     
-    @ManyToOne  // Muchos libros pueden pertecer a un autor 
+    @ManyToOne(cascade = CascadeType.PERSIST)  // Muchos libros pueden pertecer a un autor 
     @JoinColumn(name = "id_autor", nullable = false)
     private Autor autor;
 
